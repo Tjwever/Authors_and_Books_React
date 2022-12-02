@@ -1,19 +1,28 @@
 import "./App.css"
 import Author from "./components/Author"
+import {useState} from 'react'
 
 function App() {
   // would be for authorization later
   const showAuthor = true
+  const [name, setName] = useState()
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
+        input
         <p>Bootylicious!</p>
+
 
         {
           showAuthor ? (
             <>
-              <Author name='Jane Doe' genre='horror' />
+              <input type="text" onChange={(e) => {
+                console.log(e.target.value)
+                setName(e.target.value)
+
+              }}/>
+              <Author name={!name ? 'No name provided' : name} genre='horror' />
               <Author name='John Doe' genre='romance' />
               <Author name='Jack Doe' genre='comedy' />
               <Author name='Julie Doe' genre='fantasy' />
@@ -31,7 +40,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </div>
     </div>
   )
 }
