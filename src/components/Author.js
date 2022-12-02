@@ -3,7 +3,7 @@ function Author(props) {
     <>
       <h3>The author is: {props.name}</h3>
       <p>This is an author for a book.</p>
-      <h4>Most notable genre: {props.genre ? props.genre : 'No Genre Assigned'}</h4>
+      <h4>They live in: {props.location ? props.location : 'No Location Assigned'}</h4>
     </>
   )
 }

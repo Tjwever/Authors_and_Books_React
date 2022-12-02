@@ -1,18 +1,26 @@
 import "./App.css"
 import Author from "./components/Author"
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 function App() {
   // would be for authorization later
   const showAuthor = true
   const [name, setName] = useState()
+  const [authors, setAuthors] = useState()
 
+  useEffect(() => {
+    fetch('https://localhost:7150/api/author')
+      .then((response) => response.json())
+      .then((data) => {
+        setAuthors(data)
+      })
+  }, [])
+  
   return (
     <div className="App">
       <div className="App-header">
-        input
+        
         <p>Bootylicious!</p>
-
 
         {
           showAuthor ? (
@@ -22,16 +30,16 @@ function App() {
                 setName(e.target.value)
 
               }}/>
-              <Author name={!name ? 'No name provided' : name} genre='horror' />
-              <Author name='John Doe' genre='romance' />
-              <Author name='Jack Doe' genre='comedy' />
-              <Author name='Julie Doe' genre='fantasy' />
-              <Author name='Jay Doe' genre='sci-fi' />
+              {authors ? authors.map((author) => {
+                return (
+                  <Author name={author.name} location={author.location} />
+                )
+              }) : null}
+              
             </>
           )
           : <p>You can't see any Authors</p>
         }
-        {/* <Author /> */}
         <a
           className="App-link"
           href="https://reactjs.org"
