@@ -1,9 +1,22 @@
+import Card from 'react-bootstrap/Card'
+import "./Author.css"
+import EditAuthor from './EditAuthor'
+
 function Author(props) {
   return (
     <>
-      <h3>The author is: {props.name}</h3>
-      <p>This is an author for a book.</p>
-      <h4>They live in: {props.location ? props.location : 'No Location Assigned'}</h4>
+        <Card border="light" style={{ width: '18rem' }}>
+          <Card.Header>
+            <EditAuthor name={props.name} age={props.age} location={props.location} />
+          </Card.Header>
+          <Card.Body>
+            <Card.Title>{props.name}</Card.Title>
+            <Card.Text>
+              They live in {props.location ? props.location : 'No Location Assigned'}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      
     </>
   )
 }
