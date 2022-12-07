@@ -1,3 +1,7 @@
+html, .App {
+  background-color: slategrey;
+}
+
 .card-container {
   display: flex;
   justify-content: center;
@@ -9,4 +13,9 @@
 
 .btn-container {
   text-align: center;
+}
+
+.bootylicious {
+  color: rgb(217, 217, 217);
+  padding-left: 312px;
 }

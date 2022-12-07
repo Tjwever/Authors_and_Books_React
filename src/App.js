@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import AddAuthor from './components/AddAuthor'
 import EditAuthor from './components/EditAuthor'
+import Header from './components/Header'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 
@@ -56,6 +57,7 @@ function App() {
    return (
       <div className='App'>
          <div className='App-header'>
+            <Header />
             <p className='bootylicious'>Bootylicious!</p>
 
             {/* if showAuthor or authentication exists, show this */}

@@ -19,7 +19,7 @@ function Author(props) {
                   updateAuthor={props.updateAuthor}
                /> */}
                {/* Using JSX to send the props from Parent component */}
-              {props.EditAuthor}
+              {props.editAuthor}
             </Card.Header>
             <Card.Body>
                <Card.Title>{props.name}</Card.Title>
