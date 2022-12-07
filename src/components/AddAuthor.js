@@ -4,11 +4,11 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import './EditAuthor.css'
 
-function EditAuthor(props) {
+function AddAuthor(props) {
    // different props that in other files
-   const [name, setName] = useState(props.name)
-   const [age, setAge] = useState(props.age)
-   const [location, setLocation] = useState(props.location)
+   const [name, setName] = useState('')
+   const [age, setAge] = useState('')
+   const [location, setLocation] = useState('')
 
    const [show, setShow] = useState(false)
 
@@ -18,7 +18,7 @@ function EditAuthor(props) {
    return (
       <>
          <Button variant='primary' onClick={handleShow}>
-            <div className='edit-btn'>Edit</div>
+            <div className='edit-btn'>Add Author</div>
          </Button>
 
          <Modal
@@ -28,7 +28,7 @@ function EditAuthor(props) {
             keyboard={false}
          >
             <Modal.Header closeButton>
-               <Modal.Title>Update Author</Modal.Title>
+               <Modal.Title>Add Author</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                <Form>
@@ -57,7 +57,7 @@ function EditAuthor(props) {
                      />
                   </Form.Group>
                   <Form.Group>
-                     <Form.Label>Location</Form.Label>
+                     <Form.Label>Age</Form.Label>
                      <Form.Control
                         type='text'
                         value={location}
@@ -80,13 +80,19 @@ function EditAuthor(props) {
                      // on click prevents a refresh of the page
                      e.preventDefault()
                      console.log('submitted')
-                     console.log(props.id, name, age, location)
+                     console.log(name, age, location)
+                     // any time this is clicked, we have to reset the values
+                     // so that if we create an author, and click Add Author
+                     // the values will be gone
+                     setName('')
+                     setAge('')
+                     setLocation('')
                      // will call the updateAuthor method with the state's parameters as arguments
-                     props.updateAuthor(props.id, name, age, location)
+                     props.newAuthor(name, age, location)
                      handleClose()
                   }}
                >
-                  Update
+                  Add!
                </Button>
             </Modal.Footer>
          </Modal>
@@ -94,4 +100,4 @@ function EditAuthor(props) {
    )
 }
 
-export default EditAuthor
+export default AddAuthor
