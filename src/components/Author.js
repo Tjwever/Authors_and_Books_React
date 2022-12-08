@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card'
 import './Author.css'
-import EditAuthor from './EditAuthor'
+// import EditAuthor from './EditAuthor'
 
 // Author.js should be the actual page that holds the authors
 // More specifically, they should hold the author Cards component

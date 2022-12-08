@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function ColorSchemesExample() {
+function Header(props) {
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -15,8 +15,11 @@ function ColorSchemesExample() {
           </Nav>
         </Container>
       </Navbar>
+      {/* Kind of like 'yield' in ruby on rails, this is where the code for
+      things will appear that are wrapped in the <Header></Header> tags */}
+      {props.children}
     </>
   );
 }
 
-export default ColorSchemesExample;
+export default Header;
