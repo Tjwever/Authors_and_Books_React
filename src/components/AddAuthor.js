@@ -9,20 +9,20 @@ function AddAuthor(props) {
    const [name, setName] = useState('')
    const [age, setAge] = useState('')
    const [location, setLocation] = useState('')
-
-   const [show, setShow] = useState(false)
+   // being passed in from parent component, so that default value is show State in Authors.js
+   const [show, setShow] = useState(props.show)
 
    const handleClose = () => setShow(false)
    const handleShow = () => setShow(true)
 
    return (
       <>
-         <Button variant='primary' onClick={handleShow}>
+         <Button variant='primary' onClick={props.toggleShow}>
             <div className='edit-btn'>Add Author</div>
          </Button>
 
          <Modal
-            show={show}
+            show={props.show}
             onHide={handleClose}
             backdrop='static'
             keyboard={false}
@@ -71,7 +71,7 @@ function AddAuthor(props) {
                </Form>
             </Modal.Body>
             <Modal.Footer>
-               <Button variant='secondary' onClick={handleClose}>
+               <Button variant='secondary' onClick={props.toggleShow}>
                   Close
                </Button>
                <Button

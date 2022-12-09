@@ -18,7 +18,12 @@ function Authors() {
    // set information or data to the setVariable so that we can use it later
    const [name, setName] = useState()
    const [authors, setAuthors] = useState()
+   const [show, setShow] = useState(false)
 
+   function toggleShow() {
+      setShow(!show)
+   }
+   
    useEffect(() => {
       fetch('https://localhost:7150/api/author')
          .then((response) => response.json())
@@ -69,7 +74,7 @@ function Authors() {
                      
                      {/* Adding an Author */}
                      <div className='btn-container'>
-                        <AddAuthor newAuthor={newAuthor} />
+                        <AddAuthor newAuthor={newAuthor} show={show} toggleShow={toggleShow}/>
                      </div>
 
                      <div className='card-container'>
