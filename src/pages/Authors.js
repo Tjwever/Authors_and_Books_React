@@ -42,7 +42,7 @@ function Authors() {
       setAuthors([...authors, newAuthor])
    }
 
-   const updateAuthor = (id, newName, newAge, newLocation) => {
+   const updateAuthor = (id, newName, newAge, newLocation, newBook) => {
       const updatedAuthors = authors.map((author) => {
          if (id === author.id) {
             return {
@@ -50,9 +50,10 @@ function Authors() {
                name: newName,
                age: newAge,
                location: newLocation,
+               book: newBook
             }
          }
-
+         {console.log(newBook)}
          return author
       })
 
@@ -65,8 +66,7 @@ function Authors() {
             {/* <Header /> */}
             
             <Container>
-               <p className='bootylicious'>Bootylicious!</p>
-
+            <h1 className='bootylicious'>Bootylicious Authors</h1>
                {/* if showAuthor or authentication exists, show this */}
                {showAuthor ? (
                   // these are fragments, not entirely sure what they're for yet...
@@ -87,6 +87,7 @@ function Authors() {
                                     name={author.name}
                                     age={author.age}
                                     location={author.location}
+                                    books={author.books}
                                     updateAuthor={updateAuthor}
                                  />
                               )
@@ -99,6 +100,7 @@ function Authors() {
                                     name={author.name}
                                     location={author.location}
                                     age={author.age}
+                                    books={author.books}
                                     editAuthor={editAuthor}
                                  />
                               )

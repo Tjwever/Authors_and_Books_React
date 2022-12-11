@@ -1,5 +1,5 @@
 function Books() {
-  return <h1>Bootylicious Books</h1>
+  return <h1 className="bootylicious">Bootylicious Books</h1>
 }
 
 export default Books

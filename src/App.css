@@ -17,4 +17,10 @@ html, .App {
 
 .bootylicious {
   color: rgb(217, 217, 217);
+  background-color: slategrey;
+  text-align: center;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  padding: 20px;
 }
