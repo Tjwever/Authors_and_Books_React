@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Spinner from 'react-bootstrap/Spinner'
 import Author from '../components/Author'
