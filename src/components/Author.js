@@ -63,7 +63,6 @@ function Author(props) {
                   pages={book.pages}
                   updateBook={updateBook}
                 />
-                {book.name}
               </p>
             )
           })}

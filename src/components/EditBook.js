@@ -15,8 +15,8 @@ function EditBook(props) {
 
   return (
     <>
-      <Button variant="primary" size="sm" onClick={handleShow}>
-        <div className="edit-btn">Edit</div>
+      <Button variant="light" size="sm" onClick={handleShow}>
+        <div className="edit-btn">{props.name}</div>
       </Button>
 
       <Modal
