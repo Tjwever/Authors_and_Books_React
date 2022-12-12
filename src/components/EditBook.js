@@ -4,12 +4,10 @@ import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
 import "./EditAuthor.css"
 
-function EditAuthor(props) {
-  // different props that in other files
+function EditBook(props) {
   const [name, setName] = useState(props.name)
-  const [age, setAge] = useState(props.age)
-  const [location, setLocation] = useState(props.location)
-  const [book, setBook] = useState(props.books[0].name)
+  const [genre, setGenre] = useState(props.genre)
+  const [pages, setPages] = useState(props.pages)
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -17,7 +15,7 @@ function EditAuthor(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" size="sm" onClick={handleShow}>
         <div className="edit-btn">Edit</div>
       </Button>
 
@@ -28,7 +26,7 @@ function EditAuthor(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update Author</Modal.Title>
+          <Modal.Title>Update This Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -37,53 +35,35 @@ function EditAuthor(props) {
               <Form.Control
                 type="text"
                 value={name}
-                placeholder="John Smith"
-                // any time form changes, state changes
+                placeholder="Pet Cemetery"
                 onChange={(e) => {
                   setName(e.target.value)
                 }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Age</Form.Label>
+              <Form.Label>Genre</Form.Label>
               <Form.Control
                 type="text"
-                value={age}
+                value={genre}
                 placeholder="45"
-                // any time form changes, state changes
                 onChange={(e) => {
-                  setAge(e.target.value)
+                  setGenre(e.target.value)
                 }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Location</Form.Label>
+              <Form.Label>Pages</Form.Label>
               <Form.Control
                 type="text"
-                value={location}
+                value={pages}
                 placeholder="USA"
-                // any time form changes, useState changes
                 onChange={(e) => {
-                  setLocation(e.target.value)
+                  setPages(e.target.value)
                 }}
               />
             </Form.Group>
-            {/* {props.books.map((b) => {
-              return (
-                <Form.Group key={b.id}>
-                  <Form.Label>Book ID: {b.id}</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={book}
-                    placeholder="USA"
-                    // any time form changes, useState changes
-                    onChange={(e) => {
-                      setBook(e.target.value)
-                    }}
-                  />
-                </Form.Group>
-              )
-            })} */}
+            
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -96,9 +76,10 @@ function EditAuthor(props) {
               // on click prevents a refresh of the page
               e.preventDefault()
               console.log("edited")
-              console.log(props.id, name, age, location, book)
-              // will call the updateAuthor method with the state's parameters as arguments
-              props.updateAuthor(props.id, name, age, location, book)
+              console.log(props)
+              // console.log(props.id, name, age, location, book)
+              console.log(props.id, name, genre, pages)
+              props.updateBook(props.id, name, genre, pages)
               handleClose()
             }}
           >
@@ -110,4 +91,4 @@ function EditAuthor(props) {
   )
 }
 
-export default EditAuthor
+export default EditBook
