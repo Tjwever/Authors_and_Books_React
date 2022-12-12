@@ -46,7 +46,7 @@ function EditBook(props) {
               <Form.Control
                 type="text"
                 value={genre}
-                placeholder="45"
+                placeholder="Horror"
                 onChange={(e) => {
                   setGenre(e.target.value)
                 }}
