@@ -70,7 +70,8 @@ function Books() {
             {/* <Header /> */}
             
             <Container>
-            <h1 className="bootylicious">Bootylicious Books</h1>
+            <h1 className="bootylicious">Books</h1>
+            {/* <h1 className="bootylicious">Bootylicious Books</h1> */}
                {/* if showAuthor or authentication exists, show this */}
                {showBook ? (
                   // these are fragments, not entirely sure what they're for yet...

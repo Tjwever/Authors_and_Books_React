@@ -65,7 +65,8 @@ function Authors() {
             {/* <Header /> */}
             
             <Container>
-            <h1 className='bootylicious'>Bootylicious Authors</h1>
+            {/* <h1 className='bootylicious'>Bootylicious Authors</h1> */}
+            <h1 className='bootylicious'>Authors</h1>
                {/* if showAuthor or authentication exists, show this */}
                {showAuthor ? (
                   // these are fragments, not entirely sure what they're for yet...
