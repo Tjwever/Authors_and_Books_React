@@ -9,7 +9,7 @@ function EditAuthor(props) {
   const [name, setName] = useState(props.name)
   const [age, setAge] = useState(props.age)
   const [location, setLocation] = useState(props.location)
-  const [book, setBook] = useState(props.books[0].name)
+  // const [book, setBook] = useState(props.books[0].name)
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -96,9 +96,9 @@ function EditAuthor(props) {
               // on click prevents a refresh of the page
               e.preventDefault()
               console.log("edited")
-              console.log(props.id, name, age, location, book)
+              console.log(props.id, name, age, location)
               // will call the updateAuthor method with the state's parameters as arguments
-              props.updateAuthor(props.id, name, age, location, book)
+              props.updateAuthor(props.id, name, age, location)
               handleClose()
             }}
           >

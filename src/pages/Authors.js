@@ -37,6 +37,7 @@ function Authors() {
          name: name,
          age: age,
          location: location,
+         booker: {name: 'Default Book', genre: 'Genre', pages: 100}
       }
       setAuthors([...authors, newAuthor])
    }
@@ -48,11 +49,11 @@ function Authors() {
                ...author,
                name: newName,
                age: newAge,
-               location: newLocation,
-               book: newBook
+               location: newLocation
+               // book: newBook
             }
          }
-         {console.log(newBook)}
+         // {console.log(newBook)}
          return author
       })
 

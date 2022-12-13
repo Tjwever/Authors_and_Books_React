@@ -53,7 +53,7 @@ function Author(props) {
           </Card.Text>
           <hr />
           <h5>Books Published</h5>
-          {props.books.map((book) => {
+          {props.books ? props.books.map((book) => {
             return (
               <p key={book.id}>
                 <EditBook
@@ -65,7 +65,7 @@ function Author(props) {
                 />
               </p>
             )
-          })}
+          }) : <div className="d-grid gap-2"><Button variant="light" size="sm" style={{textAlign: 'center'}}>+ Add Book</Button></div>}
         </Card.Body>
       </Card>
       {/* This should be part of the EditAuthor component */}

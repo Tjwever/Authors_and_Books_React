@@ -9,6 +9,7 @@ function AddAuthor(props) {
    const [name, setName] = useState('')
    const [age, setAge] = useState('')
    const [location, setLocation] = useState('')
+   // const [book, setBook] = useState('')
    // being passed in from parent component, so that default value is show State in Authors.js
    const [show, setShow] = useState(props.show)
 
@@ -89,7 +90,7 @@ function AddAuthor(props) {
                      setLocation('')
                      // will call the updateAuthor method with the state's parameters as arguments
                      props.newAuthor(name, age, location)
-                     handleClose()
+                     props.toggleShow()
                   }}
                >
                   Add!

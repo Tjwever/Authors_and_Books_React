@@ -105,9 +105,6 @@ function Books() {
                                     name={book.name}
                                     genre={book.genre}
                                     pages={book.pages}
-                                    // location={author.location}
-                                    // age={author.age}
-                                    // books={author.books}
                                     // editAuthor={editAuthor}
                                  />
                               )
