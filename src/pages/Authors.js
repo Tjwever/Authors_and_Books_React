@@ -19,37 +19,61 @@ function Authors() {
    const [authors, setAuthors] = useState()
    const [show, setShow] = useState(false)
 
+   const url = 'api/author'
+
    function toggleShow() {
       setShow(!show)
    }
-   
+
    useEffect(() => {
-      fetch('https://localhost:7150/api/author')
+      fetch(url)
          .then((response) => response.json())
          .then((data) => {
+            console.log(data)
             setAuthors(data)
          })
    }, [])
 
    const newAuthor = (name, age, location) => {
-      const newAuthor = {
-         id: uuidv4(),
-         name: name,
-         age: age,
-         location: location,
-         booker: {name: 'Default Book', genre: 'Genre', pages: 100}
-      }
-      setAuthors([...authors, newAuthor])
+      const data = { name: name, age: age, location: location }
+
+      fetch(url, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(data),
+      })
+         .then((response) => {
+            if (!response.ok) {
+               throw new Error('Something went wrong')
+            }
+            return response.json()
+         })
+         .then((data) => {
+            console.log(data)
+         })
+         .catch((e) => {
+            console.log(e)
+         })
+      // const newAuthor = {
+      //    id: uuidv4(),
+      //    name: name,
+      //    age: age,
+      //    location: location,
+      //    booker: { name: 'Default Book', genre: 'Genre', pages: 100 },
+      // }
+      // setAuthors([...authors, newAuthor])
    }
 
-   const updateAuthor = (id, newName, newAge, newLocation, newBook) => {
+   const updateAuthor = (id, newName, newAge, newLocation) => {
       const updatedAuthors = authors.map((author) => {
          if (id === author.id) {
             return {
                ...author,
                name: newName,
                age: newAge,
-               location: newLocation
+               location: newLocation,
                // book: newBook
             }
          }
@@ -64,18 +88,21 @@ function Authors() {
       <div className='App'>
          <div className='App-header'>
             {/* <Header /> */}
-            
+
             <Container>
-            {/* <h1 className='bootylicious'>Bootylicious Authors</h1> */}
-            <h1 className='bootylicious'>Authors</h1>
+               {/* <h1 className='bootylicious'>Bootylicious Authors</h1> */}
+               <h1 className='bootylicious'>Authors</h1>
                {/* if showAuthor or authentication exists, show this */}
                {showAuthor ? (
                   // these are fragments, not entirely sure what they're for yet...
                   <>
-                     
                      {/* Adding an Author */}
                      <div className='btn-container'>
-                        <AddAuthor newAuthor={newAuthor} show={show} toggleShow={toggleShow}/>
+                        <AddAuthor
+                           newAuthor={newAuthor}
+                           show={show}
+                           toggleShow={toggleShow}
+                        />
                      </div>
 
                      <div className='card-container'>
@@ -120,7 +147,6 @@ function Authors() {
                   <p>You can't see any Authors</p>
                )}
             </Container>
-
          </div>
       </div>
    )

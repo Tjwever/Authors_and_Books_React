@@ -53,7 +53,7 @@ function Author(props) {
           </Card.Text>
           <hr />
           <h5>Books Published</h5>
-          {props.books ? props.books.map((book) => {
+          {props.books.length > 0 ? props.books.map((book) => {
             return (
               <p key={book.id}>
                 <EditBook

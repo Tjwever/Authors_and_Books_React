@@ -58,7 +58,7 @@ function AddAuthor(props) {
                      />
                   </Form.Group>
                   <Form.Group>
-                     <Form.Label>Age</Form.Label>
+                     <Form.Label>Location</Form.Label>
                      <Form.Control
                         type='text'
                         value={location}
