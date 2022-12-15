@@ -14,7 +14,7 @@ function AddAuthor(props) {
    const [show, setShow] = useState(props.show)
 
    const handleClose = () => setShow(false)
-   const handleShow = () => setShow(true)
+   // const handleShow = () => setShow(true)
 
    return (
       <>
@@ -90,7 +90,7 @@ function AddAuthor(props) {
                      setLocation('')
                      // will call the updateAuthor method with the state's parameters as arguments
                      props.newAuthor(name, age, location)
-                     props.toggleShow()
+                     // props.toggleShow()
                   }}
                >
                   Add!

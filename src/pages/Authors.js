@@ -15,8 +15,9 @@ function Authors() {
    // a variable and a setVariable argument.  What this means is
    // when we use the useState, we'll create a variable, and we'll
    // set information or data to the setVariable so that we can use it later
-   const [name, setName] = useState()
+   // const [name, setName] = useState()
    const [authors, setAuthors] = useState()
+   const [tempAuthors, setTempAuthors] = useState()
    const [show, setShow] = useState(false)
 
    const url = 'api/author'
@@ -29,8 +30,9 @@ function Authors() {
       fetch(url)
          .then((response) => response.json())
          .then((data) => {
-            console.log(data)
+            // console.log(data)
             setAuthors(data)
+            setTempAuthors(data)
          })
    }, [])
 
@@ -51,7 +53,9 @@ function Authors() {
             return response.json()
          })
          .then((data) => {
+            toggleShow()
             console.log(data)
+            setAuthors([...authors, data])
          })
          .catch((e) => {
             console.log(e)
