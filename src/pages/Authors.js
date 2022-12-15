@@ -88,6 +88,25 @@ function Authors() {
       setAuthors(updatedAuthors)
    }
 
+   const updateBook = () => {
+      fetch(url, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(authors),
+      })
+         .then((response) => {
+            return response.json
+         })
+         .then((data) => {
+            console.log('data', data)
+         })
+         .catch((e) => {
+            console.log(e)
+         })
+   }
+
    return (
       <div className='App'>
          <div className='App-header'>
@@ -134,6 +153,7 @@ function Authors() {
                                     age={author.age}
                                     books={author.books}
                                     editAuthor={editAuthor}
+                                    updateBook={updateBook}
                                  />
                               )
                            })

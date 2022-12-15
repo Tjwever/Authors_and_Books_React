@@ -12,21 +12,21 @@ function Author(props) {
 
   // put this in Authors.js then pass in props.updateBook, instead of updateBook down below
   // then update this for the fetch instead of only changing the page
-  const updateBook = (id, newName, newGenre, newPages) => {
-    const updatedBooks = books.map((book) => {
-      if (id === book.id) {
-        return {
-          ...book,
-          name: newName,
-          genre: newGenre,
-          pages: newPages,
-        }
-      }
-      return book
-    })
+  // const updateBook = (id, newName, newGenre, newPages) => {
+  //   const updatedBooks = books.map((book) => {
+  //     if (id === book.id) {
+  //       return {
+  //         ...book,
+  //         name: newName,
+  //         genre: newGenre,
+  //         pages: newPages,
+  //       }
+  //     }
+  //     return book
+  //   })
 
-    setBooks(updatedBooks)
-  }
+  //   setBooks(updatedBooks)
+  // }
 
   return (
     <>
@@ -64,7 +64,7 @@ function Author(props) {
                   genre={book.genre}
                   pages={book.pages}
                   // change to props.updateBook
-                  updateBook={updateBook}
+                  updateBook={props.updateBook}
                   // change to props.updateBook
                 />
               </p>
