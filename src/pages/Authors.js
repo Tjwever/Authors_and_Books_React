@@ -32,7 +32,7 @@ function Authors() {
       fetch(url)
          .then((response) => response.json())
          .then((data) => {
-            // console.log(data)
+            console.log(data)
             setAuthors(data)
          })
    }, [])
@@ -94,7 +94,7 @@ function Authors() {
          updatedAt: new Date(Date.now()),
          books: authors.books,
       }
-      const fetchUrl = `${url}/${authorId}`
+      const fetchUrl = `https://localhost:7150/${url}/${authorId}`
 
       console.log('authors by ID: ', authors[authorId - 1])
       console.log('authorData: ', authorData)

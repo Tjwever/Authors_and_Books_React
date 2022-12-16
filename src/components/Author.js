@@ -32,7 +32,7 @@ function Author(props) {
    return (
       <>
          {/* This should be part of the EditAuthor component */}
-         <Card border='light' style={{ width: '18rem', height: '24rem' }}>
+         <Card border='light' style={{ width: '25rem', height: '24rem', margin: 'auto' }}>
             <Card.Header>
                {/* Again, passing the props down from parent to child */}
                {/* <EditAuthor
@@ -62,13 +62,14 @@ function Author(props) {
                   props.books.map((book) => {
                      return (
                         <p key={book.id}>
-                           <EditBook
+                           {/* <EditBook
                               id={book.id}
                               name={book.name}
                               genre={book.genre}
                               pages={book.pages}
                               updateBook={props.updateBook}
-                           />
+                           /> */}
+                           {book.name}
                         </p>
                      )
                   })
