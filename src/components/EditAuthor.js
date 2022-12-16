@@ -99,6 +99,7 @@ function EditAuthor(props) {
               console.log(props.id, name, age, location)
               // will call the updateAuthor method with the state's parameters as arguments
               // props.updateAuthor(props.id)
+              // props.updateAuthor(props.id)
               props.updateAuthor(props.id, name, age, location)
               handleClose()
             }}
