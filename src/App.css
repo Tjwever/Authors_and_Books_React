@@ -24,3 +24,30 @@ html, .App {
   letter-spacing: 5px;
   padding: 20px;
 }
+
+.links {
+  text-decoration: none;
+  color: slategrey;
+  letter-spacing: 2px;
+}
+
+.back-edit {
+  padding: 12px 0px;
+}
+
+.back-edit button {
+  margin: 0 8px;
+  width: 80px;
+}
+
+hr {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hr {
+  margin: 0 auto;
+  text-align: center;
+  width: 60%;
+}

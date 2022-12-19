@@ -32,7 +32,7 @@ function Authors() {
       fetch(url)
          .then((response) => response.json())
          .then((data) => {
-            console.log(data)
+            // console.log(data)
             setAuthors(data)
          })
    }, [])
@@ -49,7 +49,7 @@ function Authors() {
          body: JSON.stringify(data),
       })
          .then((response) => {
-            console.log(response)
+            // console.log(response)
             if (!response.ok) {
                throw new Error('Something went wrong')
             }
@@ -84,73 +84,7 @@ function Authors() {
    //        .catch();
    // }
 
-   const updateAuthor = (authorId, name, age, location) => {
-      const authorData = {
-         id: authorId,
-         name: name,
-         age: age,
-         location: location,
-         createdAt: authors.createdAt,
-         updatedAt: new Date(Date.now()),
-         books: authors.books,
-      }
-      const fetchUrl = `https://localhost:7150/${url}/${authorId}`
-
-      console.log('authors by ID: ', authors[authorId - 1])
-      console.log('authorData: ', authorData)
-      console.log('current url: ', fetchUrl)
-
-      //  fetch(fetchUrl, {
-      //    method: "PUT",
-      //    headers: {
-      //      "Content-Type": "application/json",
-      //    },
-      //    body: JSON.stringify(authorData),
-      //    // body: JSON.stringify(authors[authorId]),
-      //  })
-      //    .then((response) => {
-      //      if (!response.ok) {
-      //        throw new Error("Something went wrong")
-      //      }
-      //      return response.json()
-      //    })
-      //    .then((data) => {
-      //      console.log("data", data)
-      //      setAuthors([...authors, data])
-      //    })
-      //    .catch((e) => {
-      //      console.log(e)
-      //    })
-
-      fetch(fetchUrl)
-         .then((response) => {
-            return response.json()
-         })
-         .then((data) => {
-            console.log('update fetch all data:', data)
-            setSingle(data)
-         })
-
-      fetch(fetchUrl, {
-         method: 'PUT',
-         headers: {
-            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(authorData),
-      })
-         .then((response) => console.log(response.json()))
-         .then((data) => {
-            console.log('does this even hit?')
-            console.log('edit author data', authorData)
-            setSingle(authorData)
-            console.log('whats in authors: ', authors)
-            console.log('whats in data: ', data)
-            setAuthors(authors)
-         })
-         .catch((e) => {
-            //   console.log(e)
-         })
-   }
+   
 
    const updateBook = () => {
       console.log()
@@ -197,17 +131,17 @@ function Authors() {
                         {/* If there are authors, render or show all the authors in your data, else... */}
                         {authors ? (
                            authors.map((author) => {
-                              const editAuthor = (
-                                 <EditAuthor
-                                    key={author.id}
-                                    id={author.id}
-                                    name={author.name}
-                                    age={author.age}
-                                    location={author.location}
-                                    books={author.books}
-                                    updateAuthor={updateAuthor}
-                                 />
-                              )
+                              // const editAuthor = (
+                              //    <EditAuthor
+                              //       key={author.id}
+                              //       id={author.id}
+                              //       name={author.name}
+                              //       age={author.age}
+                              //       location={author.location}
+                              //       books={author.books}
+                              //       // updateAuthor={updateAuthor}
+                              //    />
+                              // )
                               return (
                                  // When needing to have a component that could potentially change it's state
                                  // we'll need to pass the props in all the way down to the child component
@@ -218,7 +152,7 @@ function Authors() {
                                     location={author.location}
                                     age={author.age}
                                     books={author.books}
-                                    editAuthor={editAuthor}
+                                    // editAuthor={editAuthor}
                                     updateBook={updateBook}
                                  />
                               )

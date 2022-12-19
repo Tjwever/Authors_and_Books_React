@@ -32,7 +32,10 @@ function Author(props) {
    return (
       <>
          {/* This should be part of the EditAuthor component */}
-         <Card border='light' style={{ width: '25rem', height: '24rem', margin: 'auto' }}>
+         <Card
+            border='light'
+            style={{ width: '25rem', height: '22rem', margin: 'auto' }}
+         >
             <Card.Header>
                {/* Again, passing the props down from parent to child */}
                {/* <EditAuthor
@@ -43,12 +46,12 @@ function Author(props) {
                   updateAuthor={props.updateAuthor}
                /> */}
                {/* Using JSX to send the props from Parent component */}
-               {props.editAuthor}
-            </Card.Header>
-            <Card.Body>
-               <Link to={'/authors/' + props.id}>
+               {/* {props.editAuthor} */}
+               <Link className="links" to={'/authors/' + props.id}>
                   <Card.Title>{props.name}</Card.Title>
                </Link>
+            </Card.Header>
+            <Card.Body>
                <Card.Text>
                   <span>Age: {props.age}</span>
                </Card.Text>
@@ -56,7 +59,10 @@ function Author(props) {
                   They live in:{' '}
                   {props.location ? props.location : 'No Location Assigned'}
                </Card.Text>
+               <div className="hr">
                <hr />
+
+               </div>
                <h5>Books Published</h5>
                {props.books.length > 0 ? (
                   props.books.map((book) => {
