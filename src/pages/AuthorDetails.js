@@ -100,9 +100,6 @@ export default function AuthorDetails() {
                            Edit
                         </Button>
                      </Link>
-                     <Button variant='primary' size='md'>
-                        Create
-                     </Button>
                      <Button variant='danger' size='md'>
                         Delete
                      </Button>
