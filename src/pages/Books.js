@@ -24,6 +24,7 @@ function Books() {
       fetch('https://localhost:7150/api/book')
          .then((response) => response.json())
          .then((data) => {
+            console.log(data)
             setBooks(data)
          })
    }, [])

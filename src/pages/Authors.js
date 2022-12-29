@@ -36,7 +36,7 @@ function Authors() {
             setAuthors(data)
          })
    }, [])
-   // GET ALL
+   // GET ALL END
 
    const newAuthor = (name, age, location) => {
       const data = { name: name, age: age, location: location }
@@ -64,27 +64,6 @@ function Authors() {
             console.log(e)
          })
    }
-
-   //   function updateAuthor(authorId) {
-   //    const fetchUrl = `${url}/${authorId}`
-   //    fetch(fetchUrl, {
-   //        method: 'PUT',
-   //        headers: {
-   //            'Content-Type': 'application/json',
-   //        },
-   //        body: JSON.stringify(authors[authorId]),
-   //    })
-   //        .then((response) => {
-   //            return response.json();
-   //        })
-   //        .then((data) => {
-   //            setAuthors(data);
-   //            console.log(data);
-   //        })
-   //        .catch();
-   // }
-
-   
 
    const updateBook = () => {
       console.log()
@@ -131,17 +110,6 @@ function Authors() {
                         {/* If there are authors, render or show all the authors in your data, else... */}
                         {authors ? (
                            authors.map((author) => {
-                              // const editAuthor = (
-                              //    <EditAuthor
-                              //       key={author.id}
-                              //       id={author.id}
-                              //       name={author.name}
-                              //       age={author.age}
-                              //       location={author.location}
-                              //       books={author.books}
-                              //       // updateAuthor={updateAuthor}
-                              //    />
-                              // )
                               return (
                                  // When needing to have a component that could potentially change it's state
                                  // we'll need to pass the props in all the way down to the child component

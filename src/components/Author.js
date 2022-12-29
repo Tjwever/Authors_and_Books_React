@@ -80,7 +80,9 @@ function Author(props) {
                      )
                   })
                ) : (
-                  <div className='d-grid gap-2'>
+                  <h3 style={{textAlign: 'center', color: 'slateblue'}}>Add a book</h3>
+               )}
+                  {/* <div className='d-grid gap-2'>
                      <Button
                         variant='light'
                         size='sm'
@@ -88,8 +90,7 @@ function Author(props) {
                      >
                         + Add Book
                      </Button>
-                  </div>
-               )}
+                  </div> */}
             </Card.Body>
          </Card>
          {/* This should be part of the EditAuthor component */}

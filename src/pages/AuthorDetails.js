@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Author from '../components/Author'
 import '../components/Author.css'
+import AddBook from '../components/AddBook'
 
 export default function AuthorDetails() {
     const { id } = useParams()
@@ -13,6 +14,20 @@ export default function AuthorDetails() {
     // console.log(fetchUrl)
     // console.log(id)
     const [author, setAuthor] = useState()
+    const [book, setBook] = useState()
+    const [show, setShow] = useState(false)
+
+    const toggleShow = () => {
+        setShow(!show)
+    }
+
+    useEffect(() => {
+        fetch('https://localhost:7150/api/book')
+            .then((response) => response.json())
+            .then((data) => {
+                setBook(data)
+            })
+    }, [])
 
     useEffect(() => {
         fetch(fetchUrl)
@@ -23,6 +38,7 @@ export default function AuthorDetails() {
                 // console.log(data)
                 setAuthor(data)
             })
+            
     }, [])
 
     const handleDelete = () => {
@@ -35,6 +51,34 @@ export default function AuthorDetails() {
                     throw new Error('You suck and nothing happened!')
                 }
                 navigate('/authors')
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    const newBook = (name, genre, pages) => {
+        const data = { name: name, genre: genre, pages: pages, authorId: id }
+
+        fetch('https://localhost:7150/api/book', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                // console.log(response)
+                if (!response.ok) {
+                    throw new Error('Something went wrong')
+                }
+                return response.json()
+            })
+            .then((data) => {
+                toggleShow()
+                console.log('new book data: ', data)
+                setBook([...book, data])
+                setAuthor(author)
             })
             .catch((e) => {
                 console.log(e)
@@ -106,6 +150,16 @@ export default function AuthorDetails() {
                             // editAuthor={editAuthor}
                             // updateBook={updateBook}
                         />
+                        <div className='bootylicious'>
+                            {/* <Button variant='primary' size='lg'>
+                                + Add A Book +
+                            </Button> */}
+                            <AddBook
+                                toggleShow={toggleShow}
+                                show={show}
+                                newBook={newBook}
+                            />
+                        </div>
                         <div className='bootylicious back-edit'>
                             <Link className='links' to={'/authors'}>
                                 <Button variant='light' size='md'>
