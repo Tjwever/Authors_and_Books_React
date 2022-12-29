@@ -46,6 +46,9 @@ export default function AuthorEditDetails() {
             .then((response) => {
                 if (response.status === 204) {
                     setAlertVisable(true)
+                    setTimeout(() => {
+                        setAlertVisable(false)
+                    }, 4000)
                     console.log(alertVisable)
                     console.log('Success: Updated successfully!')
                 } else {
@@ -65,6 +68,11 @@ export default function AuthorEditDetails() {
             <h1 className='bootylicious'>--==AUTHOR==--</h1>
             <div className='hr'>
                 <hr />
+                {alertVisable ? (
+                    <div className='alert alert-success' role='alert'>
+                        Success: Updated successfully!
+                    </div>
+                ) : null}
             </div>
             {author ? (
                 <div className='bootylicious'>
@@ -126,10 +134,6 @@ export default function AuthorEditDetails() {
                               )
                           })
                         : null}
-
-                    {alertVisable ? (
-                        <div className="alert alert-success" role="alert">Success: Updated successfully!</div>
-                    ) : null}
 
                     <Link className='links' to={'/authors/' + id}>
                         <br />
