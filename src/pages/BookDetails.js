@@ -2,16 +2,14 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Author from '../components/Author'
+import Book from '../components/Book'
 import '../components/Author.css'
-import AddBook from '../components/AddBook'
 
-export default function AuthorDetails() {
-    const { id } = useParams()
+export default function BookDetails() {
+    const { id } = useParams() 
     const navigate = useNavigate()
-    const url = 'api/author'
+    const url = 'api/book'
     const fetchUrl = `https://localhost:7150/${url}/${id}`
-    const [author, setAuthor] = useState()
     const [book, setBook] = useState()
     const [show, setShow] = useState(false)
 
@@ -20,24 +18,16 @@ export default function AuthorDetails() {
     }
 
     useEffect(() => {
-        fetchAuthorData()
+        fetchBookData()
     }, [])
 
-    useEffect(() => {
-        fetch('https://localhost:7150/api/book')
-            .then((response) => response.json())
-            .then((data) => {
-                setBook(data)
-            })
-    }, [])
-
-    const fetchAuthorData = () => {
+    const fetchBookData = () => {
         fetch(fetchUrl)
             .then((response) => {
                 return response.json()
             })
             .then((data) => {
-                setAuthor(data)
+                setBook(data)
             })
     }
 
@@ -50,33 +40,7 @@ export default function AuthorDetails() {
                 if (!response.ok) {
                     throw new Error('You suck and nothing happened!')
                 }
-                navigate('/authors')
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
-
-    const newBook = (name, genre, pages) => {
-        const data = { name: name, genre: genre, pages: pages, authorId: id }
-
-        fetch('https://localhost:7150/api/book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Something went wrong')
-                }
-                return response.json()
-            })
-            .then((data) => {
-                toggleShow()
-                setBook([...book, data])
-                fetchAuthorData()
+                navigate('/books')
             })
             .catch((e) => {
                 console.log(e)
@@ -86,24 +50,19 @@ export default function AuthorDetails() {
     return (
         <>
             <div className='container' style={{ backgroundColor: 'slategrey' }}>
-                <p className='bootylicious'>Author Details</p>
+                <p className='bootylicious'>Book Details</p>
 
-                {author ? (
+                {book ? (
                     <>
-                        <Author
-                            // key={author.id}
-                            id={author.id}
-                            name={author.name}
-                            location={author.location}
-                            age={author.age}
-                            books={author.books}
+                        <Book
+                            key={book.id}
+                            id={book.id}
+                            name={book.name}
+                            genre={book.genre}
+                            pages={book.pages}
                         />
                         <div className='bootylicious'>
-                            <AddBook
-                                toggleShow={toggleShow}
-                                show={show}
-                                newBook={newBook}
-                            />
+                            
                         </div>
                         <div className='bootylicious back-edit'>
                             <Link className='links' to={'/authors'}>
@@ -111,7 +70,7 @@ export default function AuthorDetails() {
                                     Back
                                 </Button>
                             </Link>
-                            <Link className='links' to={'/authors/edit/' + id}>
+                            <Link className='links' to={'/books/edit/' + id}>
                                 <Button variant='info' size='md'>
                                     Edit
                                 </Button>

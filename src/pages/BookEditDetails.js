@@ -4,12 +4,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import '../components/Author.css'
 
-export default function AuthorEditDetails() {
+export default function BookEditDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
-    const url = 'api/author'
+    const url = 'api/book'
     const fetchUrl = `https://localhost:7150/${url}/${id}`
-    const [author, setAuthor] = useState()
+    const [book, setBook] = useState()
     const [alertVisable, setAlertVisable] = useState(false)
 
     useEffect(() => {
@@ -18,17 +18,17 @@ export default function AuthorEditDetails() {
                 return response.json()
             })
             .then((data) => {
-                setAuthor(data)
+                setBook(data)
             })
     }, [])
 
-    const updateAuthor = (e) => {
+    const updateBook = (e) => {
         e.preventDefault()
         const data = {
-            ...author,
-            name: author.name,
-            age: author.age,
-            location: author.location,
+            ...book,
+            name: book.name,
+            genre: book.genre,
+            pages: book.pages,
         }
 
         fetch(fetchUrl, {
@@ -47,7 +47,7 @@ export default function AuthorEditDetails() {
                 } else {
                     throw new Error('Error: Update failed miserably!')
                 }
-                setAuthor(data)
+                setBook(data)
             })
             .catch((e) => {
                 console.log('Error: ', e)
@@ -56,8 +56,8 @@ export default function AuthorEditDetails() {
 
     return (
         <>
-            <p className='bootylicious'>Edit this Author</p>
-            <h1 className='bootylicious'>--==AUTHOR==--</h1>
+            <p className='bootylicious'>Edit this Book</p>
+            <h1 className='bootylicious'>--==BOOK==--</h1>
             <div className='hr'>
                 <hr />
                 {alertVisable ? (
@@ -66,66 +66,47 @@ export default function AuthorEditDetails() {
                     </div>
                 ) : null}
             </div>
-            {author ? (
+            {book ? (
                 <div className='bootylicious'>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{author.name}:</label>{' '}
+                        <label className='col'>{book.name}:</label>{' '}
                         <input
                             className='col'
                             type='text'
-                            value={author.name}
+                            value={book.name}
                             onChange={(e) => {
-                                setAuthor({ ...author, name: e.target.value })
+                                setBook({ ...book, name: e.target.value })
                             }}
                         />
                     </div>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{author.age}:</label>{' '}
+                        <label className='col'>{book.genre}:</label>{' '}
+                        <input
+                            className='col'
+                            type='text'
+                            value={book.genre}
+                            onChange={(e) => {
+                                setBook({ ...book, genre: e.target.value })
+                            }}
+                        />
+                    </div>
+                    <div className='container col-md-5 row mx-auto'>
+                        {' '}
+                        <label className='col'>{book.pages}:</label>{' '}
                         <input
                             className='col'
                             type='number'
-                            value={author.age}
+                            value={book.pages}
                             onChange={(e) => {
-                                setAuthor({ ...author, age: e.target.value })
-                            }}
-                        />
-                    </div>
-                    <div className='container col-md-5 row mx-auto'>
-                        {' '}
-                        <label className='col'>{author.location}:</label>{' '}
-                        <input
-                            className='col'
-                            type='text'
-                            value={author.location}
-                            onChange={(e) => {
-                                setAuthor({
-                                    ...author,
-                                    location: e.target.value,
+                                setBook({
+                                    ...book,
+                                    pages: e.target.value,
                                 })
                             }}
                         />
                     </div>
-                    <br />
-                    <h1 className='bootylicious'>--==BOOKS==--</h1>
-
-                    <div className='hr'>
-                        <hr />
-                    </div>
-
-                    {author.books.length > 0
-                        ? author.books.map((book) => {
-                              return (
-                                  <div
-                                      className='container mx-auto'
-                                      key={book.id}
-                                  >
-                                      {book.name}
-                                  </div>
-                              )
-                          })
-                        : null}
 
                     <Link className='links' to={'/authors/' + id}>
                         <br />
@@ -136,7 +117,7 @@ export default function AuthorEditDetails() {
                             <Button
                                 variant='primary'
                                 size='md'
-                                onClick={updateAuthor}
+                                onClick={updateBook}
                             >
                                 Save
                             </Button>

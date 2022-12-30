@@ -95,8 +95,6 @@ function EditAuthor(props) {
             onClick={(e) => {
               // on click prevents a refresh of the page
               e.preventDefault()
-              console.log("edited")
-              console.log(props.id, name, age, location)
               // will call the updateAuthor method with the state's parameters as arguments
               // props.updateAuthor(props.id)
               // props.updateAuthor(props.id)

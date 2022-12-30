@@ -75,8 +75,6 @@ function EditBook(props) {
             onClick={(e) => {
               // on click prevents a refresh of the page
               e.preventDefault()
-              console.log("Book edited")
-              console.log(props.id, name, genre, pages)
               props.updateBook(props.id, name, genre, pages)
               handleClose()
             }}

@@ -80,8 +80,6 @@ function AddAuthor(props) {
                   onClick={(e) => {
                      // on click prevents a refresh of the page
                      e.preventDefault()
-                     console.log('submitted and added')
-                     console.log(name, age, location)
                      // any time this is clicked, we have to reset the values
                      // so that if we create an author, and click Add Author
                      // the values will be gone

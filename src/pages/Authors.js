@@ -2,9 +2,6 @@ import Container from 'react-bootstrap/Container'
 import Spinner from 'react-bootstrap/Spinner'
 import Author from '../components/Author'
 import AddAuthor from '../components/AddAuthor'
-import EditAuthor from '../components/EditAuthor'
-import Header from '../components/Header'
-import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 
 function Authors() {
@@ -28,11 +25,9 @@ function Authors() {
 
    // GET ALL
    useEffect(() => {
-      // console.log(new Date(Date.now()))
       fetch(url)
          .then((response) => response.json())
          .then((data) => {
-            // console.log(data)
             setAuthors(data)
          })
    }, [])
@@ -49,7 +44,6 @@ function Authors() {
          body: JSON.stringify(data),
       })
          .then((response) => {
-            // console.log(response)
             if (!response.ok) {
                throw new Error('Something went wrong')
             }
@@ -57,7 +51,6 @@ function Authors() {
          })
          .then((data) => {
             toggleShow()
-            console.log('new author data', data)
             setAuthors([...authors, data])
          })
          .catch((e) => {
@@ -66,7 +59,6 @@ function Authors() {
    }
 
    const updateBook = () => {
-      console.log()
       fetch(url, {
          method: 'POST',
          headers: {
@@ -78,7 +70,6 @@ function Authors() {
             return response.json()
          })
          .then((data) => {
-            console.log('data', data)
          })
          .catch((e) => {
             console.log(e)

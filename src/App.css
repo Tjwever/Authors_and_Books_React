@@ -2,6 +2,17 @@ html, .App {
   background-color: slategrey;
 }
 
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 0;
+}
+
+a {
+  color: slategrey;
+  text-decoration: none;
+}
+
 .card-container {
   display: flex;
   justify-content: center;
