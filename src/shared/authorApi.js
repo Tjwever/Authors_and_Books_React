@@ -1,12 +1,9 @@
 const url = 'api/author'
 
 export const getAuthors = async () => {
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            const authors = data
-            return authors
-        })
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
 }
 
 export const newAuthor = (name, age, location) => {
@@ -26,7 +23,7 @@ export const newAuthor = (name, age, location) => {
             return response.json()
         })
         .then((data) => {
-            // TODO - return the data, or set 
+            // TODO - return the data, or set
         })
         .catch((e) => {
             console.log(e)

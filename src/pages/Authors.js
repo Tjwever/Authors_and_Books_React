@@ -4,10 +4,10 @@ import Author from '../components/Author'
 import AddAuthor from '../components/AddAuthor'
 import { getAuthors } from '../shared/authorApi'
 import {
-	QueryClient,
-	QueryClientProvider,
-	useQuery,
-  } from '@tanstack/react-query'
+    QueryClient,
+    QueryClientProvider,
+    useQuery,
+} from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 function Authors() {
@@ -20,33 +20,50 @@ function Authors() {
     // set information or data to the setVariable so that we can use it later
     // const [name, setName] = useState()
     const [authors, setAuthors] = useState()
-    const [single, setSingle] = useState()
     const [show, setShow] = useState(false)
 
     const url = 'api/author'
 
-    const {  isError, isSuccess, isLoading, data, error } = useQuery(
+    const { isError, isLoading, data, error } = useQuery(
         ['authors'],
-        getAuthors,
-        { staleTime: 80000 }
+        getAuthors
     )
 
-	if(isError) {
-		console.log("Something went wrong...")
-	}
+    if (isError) {
+        console.log('Something went wrong...')
+        return (
+            <>
+                <div className='card-container'>
+                    <h1>Something went wrong...</h1>
+                </div>
+            </>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <div className='card-container'>
+                    <Spinner animation='border' role='status'>
+                        <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                </div>
+            </>
+        )
+    }
 
     function toggleShow() {
         setShow(!show)
     }
 
     // GET ALL
-    useEffect(() => {
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setAuthors(data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch(url)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setAuthors(data)
+    //         })
+    // }, [])
     // GET ALL END
 
     const newAuthor = (name, age, location) => {
@@ -69,23 +86,6 @@ function Authors() {
                 toggleShow()
                 setAuthors([...authors, data])
             })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
-
-    const updateBook = () => {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(authors),
-        })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {})
             .catch((e) => {
                 console.log(e)
             })
@@ -114,31 +114,23 @@ function Authors() {
 
                             <div className='card-container'>
                                 {/* If there are authors, render or show all the authors in your data, else... */}
-                                {authors ? (
-                                    authors.map((author) => {
-                                        return (
-                                            // When needing to have a component that could potentially change it's state
-                                            // we'll need to pass the props in all the way down to the child component
-                                            <Author
-                                                key={author.id}
-                                                id={author.id}
-                                                name={author.name}
-                                                location={author.location}
-                                                age={author.age}
-                                                books={author.books}
-                                                // editAuthor={editAuthor}
-                                                updateBook={updateBook}
-                                            />
-                                        )
-                                    })
-                                ) : (
-                                    // returning a spinner if authors are loading/don't exist
-                                    <Spinner animation='border' role='status'>
-                                        <span className='visually-hidden'>
-                                            Loading...
-                                        </span>
-                                    </Spinner>
-                                )}
+
+                                {data?.map((author) => {
+                                    return (
+                                        // When needing to have a component that could potentially change it's state
+                                        // we'll need to pass the props in all the way down to the child component
+                                        <Author
+                                            key={author.id}
+                                            id={author.id}
+                                            name={author.name}
+                                            location={author.location}
+                                            age={author.age}
+                                            books={author.books}
+                                            // editAuthor={editAuthor}
+                                            // updateBook={updateBook}
+                                        />
+                                    )
+                                })}
                             </div>
                         </>
                     ) : (

@@ -8,7 +8,7 @@ import BookEditDetails from './pages/BookEditDetails'
 import Books from './pages/Books'
 import Home from './pages/Home'
 import Header from './components/Header'
-// import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 const queryClient = new QueryClient({
     defaultOptions: { queries: { staleTime: 60000 } },
@@ -16,28 +16,30 @@ const queryClient = new QueryClient({
 
 function App() {
     return (
-        <>
-            <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
                 <Header>
-                    {/* <Home /> */}
-                    <Authors />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/authors' element={<Authors />} />
+                        <Route
+                            path='/authors/:id'
+                            element={<AuthorDetails />}
+                        />
+                        <Route path='/books/:id' element={<BookDetails />} />
+                        <Route
+                            path='/authors/edit/:id'
+                            element={<AuthorEditDetails />}
+                        />
+                        <Route
+                            path='/books/edit/:id'
+                            element={<BookEditDetails />}
+                        />
+                        <Route path='/books' element={<Books />} />
+                    </Routes>
                 </Header>
-            </QueryClientProvider>
-        </>
-
-        // <BrowserRouter>
-        //   <Header>
-        //     <Routes>
-        //       <Route path="/" element={<Home />} />
-        //       <Route path="/authors" element={<Authors />} />
-        //       <Route path="/authors/:id" element={<AuthorDetails />} />
-        //       <Route path="/books/:id" element={<BookDetails />} />
-        //       <Route path="/authors/edit/:id" element={<AuthorEditDetails />} />
-        //       <Route path="/books/edit/:id" element={<BookEditDetails />} />
-        //       <Route path="/books" element={<Books />} />
-        //     </Routes>
-        //   </Header>
-        // </BrowserRouter>
+            </BrowserRouter>
+        </QueryClientProvider>
     )
 }
 
