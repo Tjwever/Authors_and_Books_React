@@ -6,26 +6,18 @@ export const getAuthors = async () => {
     return data
 }
 
-export const newAuthor = (name, age, location) => {
-    const data = { name: name, age: age, location: location }
+export const getAuthorById = async (url) => {
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+}
 
-    fetch(url, {
+export const newAuthor = async (author) => {
+    const response = await fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        body: JSON.stringify(author),
+        headers: { 'Content-Type': 'application/json' },
     })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Something went wrong')
-            }
-            return response.json()
-        })
-        .then((data) => {
-            // TODO - return the data, or set
-        })
-        .catch((e) => {
-            console.log(e)
-        })
+    const data = await response.json()
+    return data
 }
