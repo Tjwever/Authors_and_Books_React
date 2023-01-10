@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react'
+import Spinner from 'react-bootstrap/Spinner'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Author from '../components/Author'
+import { useQuery } from '@tanstack/react-query'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { getAuthorById } from '../shared/authorApi'
+import { deleteAuthor } from '../shared/authorApi'
 import '../components/Author.css'
 import AddBook from '../components/AddBook'
 
 export default function AuthorDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
     const url = 'api/author'
     const fetchUrl = `https://localhost:7150/${url}/${id}`
-    const [author, setAuthor] = useState()
+    // const [author, setAuthor] = useState()
     const [book, setBook] = useState()
     const [show, setShow] = useState(false)
 
@@ -19,42 +25,44 @@ export default function AuthorDetails() {
         setShow(!show)
     }
 
-    useEffect(() => {
-        fetchAuthorData()
-    }, [])
+    const { data: author, isError, isLoading, error } = useQuery({
+        queryKey: ['author', id],
+        queryFn: () => getAuthorById(id),
+    })
 
-    useEffect(() => {
-        fetch('https://localhost:7150/api/book')
-            .then((response) => response.json())
-            .then((data) => {
-                setBook(data)
-            })
-    }, [])
-
-    const fetchAuthorData = () => {
-        fetch(fetchUrl)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setAuthor(data)
-            })
-    }
+    const deleteAuthorMutation = useMutation(deleteAuthor, {
+        onSuccess: () => {
+            // Invalidates cache and refetch
+            queryClient.invalidateQueries('author')
+        },
+    })
 
     const handleDelete = () => {
-        fetch(fetchUrl, {
-            method: 'DELETE',
-            'Content-Type': 'application/json',
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('You suck and nothing happened!')
-                }
-                navigate('/authors')
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+        deleteAuthorMutation.mutate({ id: id })
+        navigate('/authors')
+    }
+
+    if (isError) {
+        console.log('Something went wrong...')
+        return (
+            <>
+                <div className='card-container'>
+                    <h1>Something went wrong...</h1>
+                </div>
+            </>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <div className='card-container'>
+                    <Spinner animation='border' role='status'>
+                        <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                </div>
+            </>
+        )
     }
 
     const newBook = (name, genre, pages) => {
@@ -76,7 +84,7 @@ export default function AuthorDetails() {
             .then((data) => {
                 toggleShow()
                 setBook([...book, data])
-                fetchAuthorData()
+                // fetchAuthorData()
             })
             .catch((e) => {
                 console.log(e)

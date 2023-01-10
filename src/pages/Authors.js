@@ -16,7 +16,7 @@ function Authors() {
     const [show, setShow] = useState(false)
     const url = 'api/author'
 
-    const { isError, isLoading, data: authors, error } = useQuery(
+    const { data: authors, isError, isLoading,  error } = useQuery(
         ['authors'],
         getAuthors,
         { select: (data) => data.sort((a, b) => b.id - a.id) }

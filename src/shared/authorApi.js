@@ -6,8 +6,8 @@ export const getAuthors = async () => {
     return data
 }
 
-export const getAuthorById = async (url) => {
-    const response = await fetch(url)
+export const getAuthorById = async (id) => {
+    const response = await fetch(`https://localhost:7150/api/author/${id}`)
     const data = await response.json()
     return data
 }
@@ -20,4 +20,14 @@ export const newAuthor = async (author) => {
     })
     const data = await response.json()
     return data
+}
+
+export const deleteAuthor = async ({ id }) => {
+    const response = await fetch(`https://localhost:7150/api/author/${id}`, {
+        method: 'DELETE',
+        'Content-Type': 'application/json',
+    })
+    if (!response.ok) {
+        console.log('Something went wrong...')
+    } 
 }
