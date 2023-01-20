@@ -5,22 +5,15 @@ import Form from 'react-bootstrap/Form'
 import './EditAuthor.css'
 
 function AddBook(props) {
-    // different props that in other files
     const [name, setName] = useState('')
     const [genre, setGenre] = useState('')
     const [pages, setPages] = useState('')
-    // const [book, setBook] = useState('')
-    // being passed in from parent component, so that default value is show State in Authors.js
     const [show, setShow] = useState(props.show)
 
     const handleClose = () => setShow(false)
-    // const handleShow = () => setShow(true)
 
     return (
         <>
-            {/* <Button variant='primary' onClick={props.toggleShow}>
-            <div className='edit-btn'>Add Author</div>
-         </Button> */}
             <Button variant='primary' size='lg' onClick={props.toggleShow}>
                 + Add A Book +
             </Button>
@@ -42,7 +35,6 @@ function AddBook(props) {
                                 type='text'
                                 value={name}
                                 placeholder='Harry Plopper'
-                                // any time form changes, state changes
                                 onChange={(e) => {
                                     setName(e.target.value)
                                 }}
@@ -54,7 +46,6 @@ function AddBook(props) {
                                 type='text'
                                 value={genre}
                                 placeholder='Thriller'
-                                // any time form changes, state changes
                                 onChange={(e) => {
                                     setGenre(e.target.value)
                                 }}
@@ -66,7 +57,6 @@ function AddBook(props) {
                                 type='text'
                                 value={pages}
                                 placeholder='666'
-                                // any time form changes, useState changes to value
                                 onChange={(e) => {
                                     setPages(e.target.value)
                                 }}
@@ -81,18 +71,11 @@ function AddBook(props) {
                     <Button
                         variant='primary'
                         onClick={(e) => {
-                            // on click prevents a refresh of the page
                             e.preventDefault()
-                            // any time this is clicked, we have to reset the values
-                            // so that if we create an author, and click Add Author
-                            // the values will be gone
                             setName('')
                             setGenre('')
                             setPages('')
-                            // will call the updateAuthor method with the state's parameters as arguments
-                            // props.newBook()
                             props.newBook(name, genre, pages)
-                            // props.toggleShow()
                         }}
                     >
                         Add!
