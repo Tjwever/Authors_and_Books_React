@@ -2,9 +2,9 @@ import Container from 'react-bootstrap/Container'
 import Spinner from 'react-bootstrap/Spinner'
 import Author from '../components/Author'
 import AddAuthor from '../components/AddAuthor'
-import { getAuthors, newAuthor } from '../shared/authorApi'
+import { getAuthors } from '../shared/authorApi'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 function Authors() {
     // would be for authorization later
@@ -14,7 +14,6 @@ function Authors() {
     // when we use the useState, we'll create a variable, and we'll
     // set information or data to the setVariable so that we can use it later
     const [show, setShow] = useState(false)
-    const url = 'api/author'
 
     const { data: authors, isError, isLoading,  error } = useQuery(
         ['authors'],
@@ -52,10 +51,8 @@ function Authors() {
     return (
         <div className='App'>
             <div className='App-header'>
-                {/* <Header /> */}
 
                 <Container>
-                    {/* <h1 className='bootylicious'>Bootylicious Authors</h1> */}
                     <h1 className='bootylicious'>Authors</h1>
                     {/* if showAuthor or authentication exists, show this */}
                     {showAuthor ? (

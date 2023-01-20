@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,9 +15,6 @@ export default function AuthorDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
-    const url = 'api/author'
-    const fetchUrl = `https://localhost:7150/${url}/${id}`
-    // const [author, setAuthor] = useState()
     const [book, setBook] = useState()
     const [show, setShow] = useState(false)
 
@@ -84,7 +81,6 @@ export default function AuthorDetails() {
             .then((data) => {
                 toggleShow()
                 setBook([...book, data])
-                // fetchAuthorData()
             })
             .catch((e) => {
                 console.log(e)
