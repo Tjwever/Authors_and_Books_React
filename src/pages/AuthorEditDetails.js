@@ -12,7 +12,7 @@ export default function AuthorEditDetails() {
     const [author, setAuthor] = useState()
     const [alertVisable, setAlertVisable] = useState(false)
 
-    useEffect(() => {
+    const getAllAuthors = () => {
         fetch(fetchUrl)
             .then((response) => {
                 return response.json()
@@ -20,6 +20,9 @@ export default function AuthorEditDetails() {
             .then((data) => {
                 setAuthor(data)
             })
+    }
+    useEffect(() => {
+        getAllAuthors()
     }, [])
 
     const updateAuthor = (e) => {
@@ -52,6 +55,8 @@ export default function AuthorEditDetails() {
             .catch((e) => {
                 console.log('Error: ', e)
             })
+        getAllAuthors()
+        navigate('/authors')
     }
 
     return (
@@ -70,7 +75,7 @@ export default function AuthorEditDetails() {
                 <div className='bootylicious'>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{author.name}:</label>{' '}
+                        <label className='col'>Name:</label>{' '}
                         <input
                             className='col'
                             type='text'
@@ -82,7 +87,7 @@ export default function AuthorEditDetails() {
                     </div>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{author.age}:</label>{' '}
+                        <label className='col'>Age:</label>{' '}
                         <input
                             className='col'
                             type='number'
@@ -94,7 +99,7 @@ export default function AuthorEditDetails() {
                     </div>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{author.location}:</label>{' '}
+                        <label className='col'>Location:</label>{' '}
                         <input
                             className='col'
                             type='text'

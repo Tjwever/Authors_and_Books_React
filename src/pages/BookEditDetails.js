@@ -52,6 +52,8 @@ export default function BookEditDetails() {
             .catch((e) => {
                 console.log('Error: ', e)
             })
+
+            navigate('/authors')
     }
 
     return (
@@ -70,7 +72,7 @@ export default function BookEditDetails() {
                 <div className='bootylicious'>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{book.name}:</label>{' '}
+                        <label className='col'>Title:</label>{' '}
                         <input
                             className='col'
                             type='text'
@@ -82,7 +84,7 @@ export default function BookEditDetails() {
                     </div>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{book.genre}:</label>{' '}
+                        <label className='col'>Genre:</label>{' '}
                         <input
                             className='col'
                             type='text'
@@ -94,7 +96,7 @@ export default function BookEditDetails() {
                     </div>
                     <div className='container col-md-5 row mx-auto'>
                         {' '}
-                        <label className='col'>{book.pages}:</label>{' '}
+                        <label className='col'>Pages:</label>{' '}
                         <input
                             className='col'
                             type='number'
