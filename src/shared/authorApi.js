@@ -22,6 +22,25 @@ export const newAuthor = async (author) => {
     return data
 }
 
+ export const updateAuthor = async (author) => {
+    // e.preventDefault()
+    const data = {
+        ...author,
+        name: author.name,
+        age: author.age,
+        location: author.location,
+    }
+
+    const response = await fetch(`https://localhost:7150/api/author/${author.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        
+}
+
 export const deleteAuthor = async ({ id }) => {
     const response = await fetch(`https://localhost:7150/api/author/${id}`, {
         method: 'DELETE',

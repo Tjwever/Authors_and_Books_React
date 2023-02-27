@@ -13,17 +13,6 @@ function Book(props) {
                 style={{ width: '18rem', height: '10rem', margin: 'auto' }}
             >
                 <Card.Header>
-                    {/* Again, passing the props down from parent to child */}
-                    {/* <EditAuthor
-                  id={props.id}
-                  name={props.name}
-                  age={props.age}
-                  location={props.location}
-                  updateAuthor={props.updateAuthor}
-               /> */}
-                    {/* Using JSX to send the props from Parent component */}
-                    {/* {props.editAuthor} */}
-                    {/* <Card.Title>{props.name}</Card.Title> */}
                     <Link className='links' to={'/books/' + props.id}>
                         <Card.Title>{props.name}</Card.Title>
                     </Link>
@@ -34,13 +23,11 @@ function Book(props) {
                     </Card.Text>
                     <Card.Text>
                         Number of Pages:{' '}
-                        {/* {props.location ? props.location : "No Location Assigned"} */}
                         {props.pages}
                     </Card.Text>
                     <hr />
                 </Card.Body>
             </Card>
-            {/* This should be part of the EditAuthor component */}
         </>
     )
 }

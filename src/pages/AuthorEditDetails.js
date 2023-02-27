@@ -1,61 +1,44 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Link, useNavigate } from 'react-router-dom'
+import { getAuthorById, updateAuthor } from '../shared/authorApi'
 import Button from 'react-bootstrap/Button'
 import '../components/Author.css'
 
 export default function AuthorEditDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
-    const url = 'api/author'
-    const fetchUrl = `https://localhost:7150/${url}/${id}`
-    const [author, setAuthor] = useState()
+    const queryClient = useQueryClient()
+    const [name, setName] = useState()
+    const [age, setAge] = useState()
+    const [location, setLocation] = useState()
     const [alertVisable, setAlertVisable] = useState(false)
 
-    const getAllAuthors = () => {
-        fetch(fetchUrl)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setAuthor(data)
-            })
-    }
-    useEffect(() => {
-        getAllAuthors()
-    }, [])
+    const { data: author, isError, isLoading, error } = useQuery({
+        queryKey: ['author', id],
+        queryFn: () => getAuthorById(id),
+    })
 
-    const updateAuthor = (e) => {
+    const updateAuthorMutation = useMutation(updateAuthor, {
+        onSuccess: () => {
+            // Invalidates cache and refetch
+            queryClient.invalidateQueries('author')
+        },
+    })
+
+    const handleUpdate = (e) => {
         e.preventDefault()
-        const data = {
-            ...author,
-            name: author.name,
-            age: author.age,
-            location: author.location,
-        }
-
-        fetch(fetchUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+        updateAuthorMutation.mutate({
+            id: id,
+            name: name,
+            age: age,
+            location: location,
         })
-            .then((response) => {
-                if (response.status === 204) {
-                    setAlertVisable(true)
-                    setTimeout(() => {
-                        setAlertVisable(false)
-                    }, 4000)
-                } else {
-                    throw new Error('Error: Update failed miserably!')
-                }
-                setAuthor(data)
-            })
-            .catch((e) => {
-                console.log('Error: ', e)
-            })
-        getAllAuthors()
+        setName('')
+        setAge('')
+        setLocation('')
         navigate('/authors')
     }
 
@@ -79,9 +62,9 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            value={author.name}
+                            defaultValue={author.name}
                             onChange={(e) => {
-                                setAuthor({ ...author, name: e.target.value })
+                                setName(e.target.value)
                             }}
                         />
                     </div>
@@ -91,9 +74,9 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='number'
-                            value={author.age}
+                            defaultValue={author.age}
                             onChange={(e) => {
-                                setAuthor({ ...author, age: e.target.value })
+                                setAge(e.target.value)
                             }}
                         />
                     </div>
@@ -103,12 +86,9 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            value={author.location}
+                            defaultValue={author.location}
                             onChange={(e) => {
-                                setAuthor({
-                                    ...author,
-                                    location: e.target.value,
-                                })
+                                setLocation(e.target.value)
                             }}
                         />
                     </div>
@@ -141,7 +121,7 @@ export default function AuthorEditDetails() {
                             <Button
                                 variant='primary'
                                 size='md'
-                                onClick={updateAuthor}
+                                onClick={handleUpdate}
                             >
                                 Save
                             </Button>

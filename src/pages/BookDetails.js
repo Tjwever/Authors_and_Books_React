@@ -65,7 +65,7 @@ export default function BookDetails() {
                             
                         </div>
                         <div className='bootylicious back-edit'>
-                            <Link className='links' to={'/authors'}>
+                            <Link className='links' to={'/books'}>
                                 <Button variant='light' size='md'>
                                     Back
                                 </Button>
