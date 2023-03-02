@@ -15,7 +15,7 @@ export default function AuthorEditDetails() {
     const [age, setAge] = useState()
     const [location, setLocation] = useState()
     const [alertVisable, setAlertVisable] = useState(false)
-
+   
     const { data: author, isError, isLoading, error } = useQuery({
         queryKey: ['author', id],
         queryFn: () => getAuthorById(id),
@@ -30,17 +30,27 @@ export default function AuthorEditDetails() {
 
     const handleUpdate = (e) => {
         e.preventDefault()
+
+        setName(author.name)
+        setAge(author.age)
+        setLocation(author.location)
+        console.log('author', name, age, location)
+        
         updateAuthorMutation.mutate({
             id: id,
             name: name,
             age: age,
             location: location,
         })
+
+        // console.log('author', author.name, author.age, author.location)
+        
         setName('')
         setAge('')
         setLocation('')
         navigate('/authors')
     }
+    // console.log('author', author.name, author.age, author.location)
 
     return (
         <>
