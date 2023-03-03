@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuthorById, updateAuthor } from '../shared/authorApi'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import '../components/Author.css'
 
 export default function AuthorEditDetails() {
@@ -26,11 +27,34 @@ export default function AuthorEditDetails() {
 
     // Had to set the default values in useState since we're using state for our values.
     // originally it wasn't keeping the value even though it was showing on the page.
-    
+
     const [name, setName] = useState(author.name)
     const [age, setAge] = useState(author.age)
     const [location, setLocation] = useState(author.location)
     const [alertVisable, setAlertVisable] = useState(false)
+
+    if (isError) {
+        console.log('Something went wrong...')
+        return (
+            <>
+                <div className='card-container'>
+                    <h1>Something went wrong...</h1>
+                </div>
+            </>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <div className='card-container'>
+                    <Spinner animation='border' role='status'>
+                        <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                </div>
+            </>
+        )
+    }
 
     const handleUpdate = (e) => {
         e.preventDefault()
