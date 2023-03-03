@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQueryClient, useMutation } from '@tanstack/react-query'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuthorById, updateAuthor } from '../shared/authorApi'
 import Button from 'react-bootstrap/Button'

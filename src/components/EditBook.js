@@ -57,7 +57,7 @@ function EditBook(props) {
               <Form.Control
                 type="text"
                 value={pages}
-                placeholder="USA"
+                placeholder="666"
                 onChange={(e) => {
                   setPages(e.target.value)
                 }}
