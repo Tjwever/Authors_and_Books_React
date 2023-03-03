@@ -11,11 +11,7 @@ export default function AuthorEditDetails() {
     const { id } = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
-    const [name, setName] = useState()
-    const [age, setAge] = useState()
-    const [location, setLocation] = useState()
-    const [alertVisable, setAlertVisable] = useState(false)
-   
+
     const { data: author, isError, isLoading, error } = useQuery({
         queryKey: ['author', id],
         queryFn: () => getAuthorById(id),
@@ -28,14 +24,17 @@ export default function AuthorEditDetails() {
         },
     })
 
+    // Had to set the default values in useState since we're using state for our values.
+    // originally it wasn't keeping the value even though it was showing on the page.
+    
+    const [name, setName] = useState(author.name)
+    const [age, setAge] = useState(author.age)
+    const [location, setLocation] = useState(author.location)
+    const [alertVisable, setAlertVisable] = useState(false)
+
     const handleUpdate = (e) => {
         e.preventDefault()
 
-        setName(author.name)
-        setAge(author.age)
-        setLocation(author.location)
-        console.log('author', name, age, location)
-        
         updateAuthorMutation.mutate({
             id: id,
             name: name,
@@ -43,14 +42,11 @@ export default function AuthorEditDetails() {
             location: location,
         })
 
-        // console.log('author', author.name, author.age, author.location)
-        
         setName('')
         setAge('')
         setLocation('')
         navigate('/authors')
     }
-    // console.log('author', author.name, author.age, author.location)
 
     return (
         <>
@@ -72,7 +68,7 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            defaultValue={author.name}
+                            value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
                             }}
@@ -84,7 +80,7 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='number'
-                            defaultValue={author.age}
+                            value={age}
                             onChange={(e) => {
                                 setAge(e.target.value)
                             }}
@@ -96,7 +92,7 @@ export default function AuthorEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            defaultValue={author.location}
+                            value={location}
                             onChange={(e) => {
                                 setLocation(e.target.value)
                             }}
