@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import Spinner from 'react-bootstrap/Spinner'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
-import Author from '../components/Author'
-import { useQuery } from '@tanstack/react-query'
-import { useQueryClient, useMutation } from '@tanstack/react-query'
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
 import { getAuthorById } from '../shared/authorApi'
 import { deleteAuthor } from '../shared/authorApi'
-import '../components/Author.css'
+import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
+import Author from '../components/Author'
 import AddBook from '../components/AddBook'
+import '../components/Author.css'
 
 export default function AuthorDetails() {
     const { id } = useParams()

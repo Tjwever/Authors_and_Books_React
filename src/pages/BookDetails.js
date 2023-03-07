@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
+import { getBookById, deleteBook } from '../shared/bookApi'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Book from '../components/Book'
-import { getBookById, deleteBook } from '../shared/bookApi'
 import '../components/Author.css'
 
 export default function BookDetails() {
