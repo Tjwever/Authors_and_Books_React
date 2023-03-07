@@ -8,17 +8,14 @@ import Spinner from 'react-bootstrap/Spinner'
 import '../components/Author.css'
 
 export default function BookEditDetails() {
-
     const { id } = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
-    
+
     const { data: book, isError, isLoading, error } = useQuery({
         queryKey: ['book', id],
         queryFn: () => getBookById(id),
     })
-
-    console.log(book)
 
     const updateBookMutation = useMutation(updateBook, {
         onSuccess: () => {
@@ -71,59 +68,8 @@ export default function BookEditDetails() {
         setName('')
         setGenre('')
         setPages('')
-        navigate('/authors')
+        navigate('/books')
     }
-    
-    // const { id } = useParams()
-    // const navigate = useNavigate()
-    // const url = 'api/book'
-    // const fetchUrl = `https://localhost:7150/${url}/${id}`
-    // const [book, setBook] = useState()
-    // const [alertVisable, setAlertVisable] = useState(false)
-    
-    // useEffect(() => {
-    //     fetch(fetchUrl)
-    //         .then((response) => {
-    //             return response.json()
-    //         })
-    //         .then((data) => {
-    //             setBook(data)
-    //         })
-    // }, [])
-
-    // const updateBook = (e) => {
-    //     e.preventDefault()
-    //     const data = {
-    //         ...book,
-    //         name: book.name,
-    //         genre: book.genre,
-    //         pages: book.pages,
-    //     }
-
-    //     fetch(fetchUrl, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(data),
-    //     })
-    //         .then((response) => {
-    //             if (response.status === 204) {
-    //                 setAlertVisable(true)
-    //                 setTimeout(() => {
-    //                     setAlertVisable(false)
-    //                 }, 4000)
-    //             } else {
-    //                 throw new Error('Error: Update failed miserably!')
-    //             }
-    //             setBook(data)
-    //         })
-    //         .catch((e) => {
-    //             console.log('Error: ', e)
-    //         })
-
-    //         navigate('/authors')
-    // }
 
     return (
         <>
@@ -145,7 +91,7 @@ export default function BookEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            value={book.name}
+                            value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
                             }}
@@ -157,7 +103,7 @@ export default function BookEditDetails() {
                         <input
                             className='col'
                             type='text'
-                            value={book.genre}
+                            value={genre}
                             onChange={(e) => {
                                 setGenre(e.target.value)
                             }}
@@ -169,28 +115,30 @@ export default function BookEditDetails() {
                         <input
                             className='col'
                             type='number'
-                            value={book.pages}
+                            value={pages}
                             onChange={(e) => {
                                 setPages(e.target.value)
                             }}
                         />
                     </div>
 
-                    <Link className='links' to={'/authors/' + id}>
-                        <br />
-                        <div className='bootylicious back-edit'>
+                    <br />
+
+                    <div className='bootylicious back-edit'>
+                        <Button
+                            variant='primary'
+                            size='md'
+                            onClick={handleUpdate}
+                        >
+                            Save
+                        </Button>
+
+                    <Link className='links' to={'/books/' + id}>
                             <Button variant='light' size='md'>
                                 Back
                             </Button>
-                            <Button
-                                variant='primary'
-                                size='md'
-                                onClick={handleUpdate}
-                            >
-                                Save
-                            </Button>
-                        </div>
                     </Link>
+                        </div>
                 </div>
             ) : null}
         </>

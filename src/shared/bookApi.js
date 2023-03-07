@@ -32,7 +32,7 @@ export const newBook = async (book) => {
         pages: book.pages,
     }
 
-    const response = await fetch(`https://localhost:7150/api/author/${book.id}`, {
+    const response = await fetch(`https://localhost:7150/api/book/${book.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

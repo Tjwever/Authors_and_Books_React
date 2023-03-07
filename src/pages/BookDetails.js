@@ -1,50 +1,63 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import Book from '../components/Book'
+import { getBookById, deleteBook } from '../shared/bookApi'
 import '../components/Author.css'
 
 export default function BookDetails() {
     const { id } = useParams() 
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
     const url = 'api/book'
     const fetchUrl = `https://localhost:7150/${url}/${id}`
-    const [book, setBook] = useState()
     const [show, setShow] = useState(false)
 
     const toggleShow = () => {
         setShow(!show)
     }
 
-    useEffect(() => {
-        fetchBookData()
-    }, [])
+    const { data: book, isError, isLoading, error } = useQuery({
+        queryKey: ['book', id],
+        queryFn: () => getBookById(id),
+    })
 
-    const fetchBookData = () => {
-        fetch(fetchUrl)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setBook(data)
-            })
-    }
+    const deleteBookMutation = useMutation(deleteBook, {
+        onSuccess: () => {
+            // Invalidates cache and refetch
+            queryClient.invalidateQueries('book')
+        },
+    })
 
     const handleDelete = () => {
-        fetch(fetchUrl, {
-            method: 'DELETE',
-            'Content-Type': 'application/json',
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('You suck and nothing happened!')
-                }
-                navigate('/books')
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+        deleteBookMutation.mutate({ id: id })
+        navigate('/books')
+    }
+
+    if (isError) {
+        console.log('Something went wrong...')
+        return (
+            <>
+                <div className='card-container'>
+                    <h1>Something went wrong...</h1>
+                </div>
+            </>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <>
+                <div className='card-container'>
+                    <Spinner animation='border' role='status'>
+                        <span className='visually-hidden'>Loading...</span>
+                    </Spinner>
+                </div>
+            </>
+        )
     }
 
     return (
