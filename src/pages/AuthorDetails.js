@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import Author from '../components/Author'
 import AddBook from '../components/AddBook'
+import { newBook } from '../shared/bookApi'
 import '../components/Author.css'
 
 export default function AuthorDetails() {
@@ -61,30 +62,32 @@ export default function AuthorDetails() {
         )
     }
 
-    const newBook = (name, genre, pages) => {
-        const data = { name: name, genre: genre, pages: pages, authorId: id }
+    // console.log(author.books.name)
+    
+    // const newBook = (name, genre, pages) => {
+    //     const data = { name: name, genre: genre, pages: pages, authorId: id }
 
-        fetch('https://localhost:7150/api/book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Something went wrong')
-                }
-                return response.json()
-            })
-            .then((data) => {
-                toggleShow()
-                setBook([...book, data])
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
+    //     fetch('https://localhost:7150/api/book', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data),
+    //     })
+    //         .then((response) => {
+    //             if (!response.ok) {
+    //                 throw new Error('Something went wrong')
+    //             }
+    //             return response.json()
+    //         })
+    //         .then((data) => {
+    //             toggleShow()
+    //             setBook([...book, data])
+    //         })
+    //         .catch((e) => {
+    //             console.log(e)
+    //         })
+    // }
 
     return (
         <>
@@ -105,6 +108,10 @@ export default function AuthorDetails() {
                             <AddBook
                                 toggleShow={toggleShow}
                                 show={show}
+                                id={author.id}
+                                name={author.books.name}
+                                genre={author.books.genre}
+                                pages={author.books.pages}
                                 newBook={newBook}
                             />
                         </div>

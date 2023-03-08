@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import { newBook } from '../shared/bookApi'
+import { getBookById } from '../shared/bookApi'
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query'
 import './EditAuthor.css'
 
 function AddBook(props) {
+    const { id } = useParams()
+    const queryClient = useQueryClient()
+    
     const [name, setName] = useState('')
     const [genre, setGenre] = useState('')
     const [pages, setPages] = useState('')
@@ -12,6 +19,34 @@ function AddBook(props) {
 
     const handleClose = () => setShow(false)
 
+    const addBookMutation = useMutation(newBook, {
+        onSuccess: () => {
+            // Invalidates cache and refetch
+            queryClient.invalidateQueries('book')
+        },
+    })
+
+    const handleNewBook = (e) => {
+        e.preventDefault()
+
+        const book = {
+            name: name,
+            genre: genre,
+            pages: pages,
+            authorId: props.id
+        }
+
+        addBookMutation.mutate(book)
+
+        setName('')
+        setGenre('')
+        setPages('')
+        
+		props.toggleShow()
+    }
+
+    console.log(props.id)
+    
     return (
         <>
             <Button variant='primary' size='lg' onClick={props.toggleShow}>
@@ -70,13 +105,7 @@ function AddBook(props) {
                     </Button>
                     <Button
                         variant='primary'
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setName('')
-                            setGenre('')
-                            setPages('')
-                            props.newBook(name, genre, pages)
-                        }}
+                        onClick={handleNewBook}
                     >
                         Add!
                     </Button>
