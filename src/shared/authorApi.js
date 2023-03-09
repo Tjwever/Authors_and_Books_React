@@ -13,7 +13,6 @@ export const getAuthorById = async (id) => {
 }
 
 export const newAuthor = async (author) => {
-    console.log(author)
     const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(author),

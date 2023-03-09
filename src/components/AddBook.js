@@ -33,7 +33,7 @@ function AddBook(props) {
             name: name,
             genre: genre,
             pages: pages,
-            authorId: props.id
+            authorId: props.id,
         }
 
         addBookMutation.mutate(book)
@@ -44,8 +44,6 @@ function AddBook(props) {
         
 		props.toggleShow()
     }
-
-    console.log(props.id)
     
     return (
         <>

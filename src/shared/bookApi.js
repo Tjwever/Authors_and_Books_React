@@ -14,15 +14,14 @@ export const getBookById = async (id) => {
 
 
 export const newBook = async (book) => {
-    console.log(book)
-    const response = await fetch(url, {
+    const response = await fetch('https://localhost:7150/api/book', {
         method: 'POST',
         body: JSON.stringify(book),
         headers: { 'Content-Type': 'application/json' },
     })
-    // const data = await response.json()
-    console.log('response:', await response.json())
-    // return data
+    const data = await response.json()
+    // console.log('response:', await response.json())
+    return data
 }
 
  export const updateBook = async (book) => {
