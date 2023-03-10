@@ -11,6 +11,9 @@ function AddAuthor(props) {
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
     const [location, setLocation] = useState('')
+    const [title, setTitle] = useState('')
+    const [genre, setGenre] = useState('')
+    const [pages, setPages] = useState('')
     const queryClient = useQueryClient()
     // being passed in from parent component, so that default value is show State in Authors.js
     const [show, setShow] = useState(props.show)
@@ -23,14 +26,27 @@ function AddAuthor(props) {
             queryClient.invalidateQueries('author')
         },
     })
-
+    // console.log(new Date().toISOString())
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const dateTime = new Date().toISOString()
 
         const author = {
             name: name,
             age: age,
             location: location,
+            createdAt: dateTime,
+            updatedAt: dateTime,
+            books: [
+                {
+                    name: title,
+                    genre: genre,
+                    pages: pages,
+                    createdAt: dateTime,
+                    updatedAt: dateTime,
+                },
+            ],
         }
 
         addAuthorMutation.mutate(author)
@@ -38,8 +54,11 @@ function AddAuthor(props) {
         setName('')
         setAge('')
         setLocation('')
-        
-		props.toggleShow()
+        setTitle('')
+        setGenre('')
+        setPages('')
+
+        props.toggleShow()
     }
 
     return (
@@ -55,7 +74,7 @@ function AddAuthor(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Author</Modal.Title>
+                    <Modal.Title>Add Author w/ a Book</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -98,6 +117,50 @@ function AddAuthor(props) {
                                 // any time form changes, useState changes to value
                                 onChange={(e) => {
                                     setLocation(e.target.value)
+                                }}
+                            />
+                        </Form.Group>
+                        <hr />
+                        {/* BOOK INFO */}
+                        <Form.Group>
+                            <Form.Label>Book Title</Form.Label>
+                            <Form.Control
+                                type='text'
+                                value={title}
+                                id='title'
+                                name='title'
+                                placeholder='Lord of the Bracelets'
+                                // any time form changes, useState changes to value
+                                onChange={(e) => {
+                                    setTitle(e.target.value)
+                                }}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Genre</Form.Label>
+                            <Form.Control
+                                type='text'
+                                value={genre}
+                                id='genre'
+                                name='genre'
+                                placeholder='Fantasy'
+                                // any time form changes, useState changes to value
+                                onChange={(e) => {
+                                    setGenre(e.target.value)
+                                }}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Pages</Form.Label>
+                            <Form.Control
+                                type='text'
+                                value={pages}
+                                id='pages'
+                                name='pages'
+                                placeholder='800'
+                                // any time form changes, useState changes to value
+                                onChange={(e) => {
+                                    setPages(e.target.value)
                                 }}
                             />
                         </Form.Group>

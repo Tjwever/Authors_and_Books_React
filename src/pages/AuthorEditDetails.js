@@ -58,11 +58,14 @@ export default function AuthorEditDetails() {
     const handleUpdate = (e) => {
         e.preventDefault()
 
+        const dateTime = new Date().toISOString()
+
         updateAuthorMutation.mutate({
             id: id,
             name: name,
             age: age,
             location: location,
+            updatedAt: dateTime,
         })
 
         setName('')

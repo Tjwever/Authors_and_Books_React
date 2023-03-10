@@ -58,11 +58,15 @@ export default function BookEditDetails() {
     const handleUpdate = (e) => {
         e.preventDefault()
 
+        const dateTime = new Date().toISOString()
+
         updateBookMutation.mutate({
             id: id,
             name: name,
             genre: genre,
             pages: pages,
+            updatedAt: dateTime,
+            authorId: book.authorId
         })
 
         setName('')
