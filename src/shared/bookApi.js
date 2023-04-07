@@ -12,7 +12,6 @@ export const getBookById = async (id) => {
     return data
 }
 
-
 export const newBook = async (book) => {
     const response = await fetch('https://localhost:7150/api/book', {
         method: 'POST',
@@ -20,12 +19,10 @@ export const newBook = async (book) => {
         headers: { 'Content-Type': 'application/json' },
     })
     const data = await response.json()
-    // console.log('response:', await response.json())
     return data
 }
 
- export const updateBook = async (book) => {
-    // e.preventDefault()
+export const updateBook = async (book) => {
     const data = {
         ...book,
         name: book.name,
@@ -40,7 +37,6 @@ export const newBook = async (book) => {
         },
         body: JSON.stringify(data),
     })
-        
 }
 
 export const deleteBook = async ({ id }) => {
@@ -50,23 +46,5 @@ export const deleteBook = async ({ id }) => {
     })
     if (!response.ok) {
         console.log('Something went wrong...')
-    } 
+    }
 }
-
-
-// const updateBook = () => {
-//     fetch(url, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(books),
-//     })
-//         .then((response) => {
-//             return response.json()
-//         })
-//         .then((data) => {})
-//         .catch((e) => {
-//             console.log(e)
-//         })
-// }

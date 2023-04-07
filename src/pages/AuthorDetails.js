@@ -62,33 +62,6 @@ export default function AuthorDetails() {
         )
     }
 
-    // console.log(author.books.name)
-    
-    // const newBook = (name, genre, pages) => {
-    //     const data = { name: name, genre: genre, pages: pages, authorId: id }
-
-    //     fetch('https://localhost:7150/api/book', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(data),
-    //     })
-    //         .then((response) => {
-    //             if (!response.ok) {
-    //                 throw new Error('Something went wrong')
-    //             }
-    //             return response.json()
-    //         })
-    //         .then((data) => {
-    //             toggleShow()
-    //             setBook([...book, data])
-    //         })
-    //         .catch((e) => {
-    //             console.log(e)
-    //         })
-    // }
-
     return (
         <>
             <div className='container' style={{ backgroundColor: 'slategrey' }}>
@@ -97,7 +70,6 @@ export default function AuthorDetails() {
                 {author ? (
                     <>
                         <Author
-                            // key={author.id}
                             id={author.id}
                             name={author.name}
                             location={author.location}

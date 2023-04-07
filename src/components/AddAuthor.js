@@ -26,7 +26,7 @@ function AddAuthor(props) {
             queryClient.invalidateQueries('author')
         },
     })
-    // console.log(new Date().toISOString())
+    
     const handleSubmit = (e) => {
         e.preventDefault()
 
