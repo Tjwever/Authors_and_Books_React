@@ -65,6 +65,7 @@ export default function AuthorEditDetails() {
             name: name,
             age: age,
             location: location,
+            createdAt: author.createdAt,
             updatedAt: dateTime,
         })
 

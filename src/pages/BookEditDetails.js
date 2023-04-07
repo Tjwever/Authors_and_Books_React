@@ -65,6 +65,7 @@ export default function BookEditDetails() {
             name: name,
             genre: genre,
             pages: pages,
+            createdAt: book.createdAt,
             updatedAt: dateTime,
             authorId: book.authorId
         })
